@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 class Patient(models.Model):
 
 	user = models.OneToOneField(User)
+	curp = models.CharField(max_length=18, blank=False)
 	birth = models.DateField(auto_now=False, auto_now_add=False, blank=False)
 	phone = PhoneNumberField(blank=False)
 
