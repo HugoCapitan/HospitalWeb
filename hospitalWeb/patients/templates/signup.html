@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Login</title>
+</head>
+<body>
+	<header>
+		<h1>HospitalWeb</h1>
+	</header>
+	<section class="sign_form" >
+		<form action="" method="post">
+			{% csrf_token %}
+			{{form.as_p}}
+			<input class="enviar" type="submit" value="Enviar" />
+		</form>
+	</section>
+</body>
+</html>

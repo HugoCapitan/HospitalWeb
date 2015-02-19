@@ -8,7 +8,7 @@ from patients.models import Patient
 class AppointmentKind(models.Model):
 	kind = models.CharField(max_length=50, blank=False)
 	duration = models.PositiveIntegerField(blank=False)
-	doctor = models.ManyToManyField(Doctor)
+	doctors = models.ManyToManyField(Doctor)
 
 	# PENDIENTE:
 	# primary key(nombre_tipocita, medico_tipocita)
