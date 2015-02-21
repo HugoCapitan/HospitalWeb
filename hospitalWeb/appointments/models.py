@@ -6,12 +6,9 @@ from patients.models import Patient
 
 
 class AppointmentKind(models.Model):
-	kind = models.CharField(max_length=50, blank=False)
+	kind = models.CharField(max_length=50, blank=False, primary_key=True)
 	duration = models.PositiveIntegerField(blank=False)
 	doctors = models.ManyToManyField(Doctor)
-
-	# PENDIENTE:
-	# primary key(nombre_tipocita, medico_tipocita)
 
 	class Meta:
 		verbose_name = "AppointmentKind"
@@ -28,9 +25,11 @@ class Appointment(models.Model):
 	comment = models.TextField()
 	kind = models.ForeignKey(AppointmentKind)
 	confirmed = models.BooleanField(default=False)
+	primaryKey = models.CharField(max_length=255, primary_key=True, editable=False)
 
-	# PENDIENTE:
-	# primary key (fecha_cita, paciente_cita, medico_cita)
+	def save(self, *args, **kwargs):
+		self.primaryKey = 'Doctor: %s, Paciente: %s, Horario: %s' % (self.doctor.medical_identification_card, self.patient.curp, self.date)
+		super(Appointment, self).save(*args, **kwargs)
 
 	class Meta:
 		verbose_name = "Appointment"
@@ -38,5 +37,3 @@ class Appointment(models.Model):
 
 	def __str__(self):
 		return 'Doctor: %s, Paciente: %s, Horario: %s' % (self.doctor, self.patient, self.date)
-
-

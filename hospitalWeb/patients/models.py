@@ -18,4 +18,4 @@ class Patient(models.Model):
 		verbose_name_plural = "Patients"
 
 	def __str__(self):
-		return self.user.first_name
+		return '%s %s' % (self.user.first_name, self.user.last_name)

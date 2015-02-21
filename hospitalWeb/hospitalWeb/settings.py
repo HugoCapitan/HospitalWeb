@@ -26,6 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = '/signin/'
 
 # Application definition
 
@@ -52,6 +53,11 @@ MIDDLEWARE_CLASSES = (
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+# Backends
+# AUTHENTICATION_BACKENDS = (
+#     'patients.backends.EmailBackend',
+# )
 
 ROOT_URLCONF = 'hospitalWeb.urls'
 

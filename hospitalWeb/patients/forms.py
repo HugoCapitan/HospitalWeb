@@ -7,6 +7,8 @@ from .models import Patient
 
 class UserCreationEmailForm(UserCreationForm):
 	email = forms.EmailField()
+	first_name = forms.CharField(max_length=50)
+	last_name = forms.CharField(max_length=50)
 
 	class Meta:
 		model = User
@@ -29,8 +31,6 @@ class UserCreationEmailForm(UserCreationForm):
 
 class PatientDataFillingForm(forms.ModelForm):
 
-	#Añadir informacion de usuario con la secion del mismo
-
 	class Meta:
 		model = Patient
-		fields = ('curp', 'birth', 'phone')
+		fields = ('curp', 'birth', 'phone', 'user')

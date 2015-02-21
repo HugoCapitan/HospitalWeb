@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hospital Buenavista</title>
+</head>
+<body>
+	<header>
+		<h1>Hospital Buenavista</h1>
+		<p> {{ user.first_name }} {{user.last_name}} </p>
+	</header>
+	<section class="contenido">
+		<div class"prox_citas">
+			{% for c in citas %}
+			<div class="item">
+				<div class="fecha">
+					{{ c.fecha }}
+				</div>
+				<div class="doctor">
+					{{ c.doctor }}
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="f_cita">
+			<form>
+				<input type="text" placeholder:"Prueba con algo como 'Odontologia'">
+				<input type="submit" value="enviar">
+			</form>
+		</div>
+	</section>
+	<section class="accciones">
+		<div class="item">
+			<a href="">Citas Pasadas</a>
+		</div>
+		<div class="item">
+			<a href="">Diagnosticos</a>
+		</div>
+		<div class="item">
+			<a href="">Mensajes</a>
+		</div>
+	</section>
+</body>
+</html>
