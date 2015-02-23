@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Patient Citas</title>
-</head>
-<body>
-	{{object.date}}
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+	<div class="cita_detalle">
+		<div class="info">
+			<p>Tipo: {{ object.kind }}</p>
+			<p>Doctor: {{ object.doctor }}</p>
+		</div>
+		<div class="fecha">
+			<p>Fecha: {{ object.date.date }}</p> 
+			<p>Hora: {{ object.date.time }}</p>
+		</div>
+		<div class="adicional">
+			<p>Comentarios: {{ object.comment }}</p>
+			{% if object.confirmed %}
+				Cita Confirmada, Recuerda la fecha y la hora
+			{% else %}
+				Esperando Confirmacion
+			{% endif %}
+		</div>
+	</div>
+{% endblock content %}

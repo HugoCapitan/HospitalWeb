@@ -1,0 +1,275 @@
+@font-face{
+	font-family:icons;
+	src:url(../fonts/icons.woff);
+}
+
+body,html
+{
+	margin:0px;
+	padding:0px;
+}
+
+#icon
+{
+	color:#FFF;
+	font-size:32px;
+	font-family:icons;
+	height:64%;
+	width:10%;
+	float:left;
+	padding:4px;
+	text-align:center;
+	line-height:72px;
+	transition:all ease 0.5s;
+	-webkit-transition:all ease 0.5s;
+	-moz-transition:all ease 0.5s;
+	-ms-transition:all ease 0.5s;
+	-o-transition:all ease 0.5s;
+}
+
+#iconButton
+{
+	margin-top:35%;
+	font-size:32px;
+	font-family:icons;
+	height:100%;
+	background-color:rgba(0,45,45,0);
+	border:none;
+	color:#fff;	
+	outline:none;
+}
+
+#title
+{
+	width:90%;
+	height:64px;	
+	line-height:32px;
+	float:left;
+	margin-left:10%;
+	position:fixed;
+}
+
+#MenuBar
+{
+	width:20%;
+	position:fixed;
+	z-index:2;
+	background-color:#FFF;
+	font-family:'Roboto','Helvetica',arial;
+	color:rgba(0,0,0,0.8);
+	transition:all ease 0.5s;
+	-webkit-transition:all ease 0.5s;
+	-moz-transition:all ease 0.5s;
+	-ms-transition:all ease 0.5s;
+	-o-transition:all ease 0.5s;
+	
+}
+
+#ContentWrapper
+{
+	height:100%;
+	z-index:1;
+	position:fixed;
+	margin-left:20%;
+	padding:none;
+	background-color:#f9f9f9;
+	transition:all ease 0.5s;
+	-webkit-transition:all ease 0.5s;
+	-moz-transition:all ease 0.5s;
+	-ms-transition:all ease 0.5s;
+	-o-transition:all ease 0.5s;
+}
+
+#NavigationBar
+{	
+	width:100%;
+	color:#FFF;
+	height:64px;
+	margin-top:-17px;
+	margin-bottom:48px;
+	background-color:#2196F3;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+	font-family:'Roboto','Helvetica',arial;
+	overflow:hidden;
+}
+
+#ContentHolder
+{
+	width:80%;
+	height:80%;
+	margin-left:auto;
+	margin-right:auto;
+	font-family:'Roboto','Helvetica',arial;
+	padding-left:12%;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+
+#feed
+{
+	width:100%;
+	height:64px;
+}
+
+#video
+{
+	float:left;
+	width:64px;
+	height:64px;
+	overflow:hidden;
+}
+
+#text
+{
+	float:left;
+	width:75%;
+	height:100%;
+	padding:6px;
+	font-size:75%;
+}
+
+.tile
+{
+	width:100%;
+	height:64px;	
+}
+
+.option,.optionLogo
+{
+	width:100%;
+	height:32px;
+	text-align:center;
+	line-height:32px;
+	border-bottom:1px solid rgba(0,0,0,0.12);
+	font-size:90%;
+}
+
+.optionLogo
+{
+	height:64px;
+}
+
+#thumb
+{
+	width:64px;
+	height:64px;
+	border-radius:32px;
+	position:fixed;
+	z-index:1;
+	margin-top:8px;
+}
+
+#logo
+{
+	height:64px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#fecha
+{
+	color:rgba(0,0,0,0.5);
+}
+
+h1
+{
+	margin-left:6%; 
+	font-weight:500;
+	float:left;
+}
+
+h2
+{
+	color:rgba(0,0,0,0.8);		
+	margin-bottom:4px;
+}
+
+hr
+{
+	border:none;
+	background-color:rgba(0,0,0,0.12);
+	height:1px;
+}
+
+a,a:link,a:active
+{
+	font-family: 'Roboto','Helvetica', arial;
+	text-decoration:none;
+	color:rgba(33, 150, 243, 0.8);
+	transition:all ease 0.5s;
+	-webkit-transition:all ease 0.5s;
+	-moz-transition:all ease 0.5s;
+	-ms-transition:all ease 0.5s;
+	-o-transition:all ease 0.5s;
+}
+
+a:hover
+{
+	color:rgba(33, 150, 243, 0.5);
+}
+
+#video
+{
+	width:40%;
+}
+
+#img
+{
+	width:80%;
+}
+
+/*Media Querys, el CSS le hace un "query" a la pantalla para saber
+que estilos aplicar dependiendo el tamaño y orientacion*/
+
+@media (min-width: 100px) and (max-width: 1024px) {
+	#MenuBar
+	{
+		opacity:0;
+		width:0%;
+		z-index:0;
+	}
+
+	#ContentWrapper
+	{
+		width:100%;
+		margin-left:0%;
+	}
+}
+
+@media (min-width: 1024px){
+
+	#icon
+	{
+		opacity:0;
+		width:0px;
+	}
+
+	#ContentWrapper
+	{
+		width:80%;
+		margin-left:20%;
+	}
+
+	#MenuBar
+	{
+		opacity:1;
+		width:20%;
+		z-index:2;
+	}
+}
+
+@media (orientation : portrait){
+
+	#iconButton
+	{
+		margin-top:16px;
+	}
+}
+
+@media (orientation : landscape){
+	
+	#iconButton
+	{
+		margin-top:16px;
+	}
+}

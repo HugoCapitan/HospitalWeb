@@ -7,7 +7,9 @@
 			<p>Proximas Citas</p>
 
 			{% for c in citas %}
-			<a href="">
+			{# doc-%s-pat-%s-day-%s-month-%s-year-%s-hour-%s-minute-%s #}
+			<a href="/patients/appointment/{{ c.slug }}">
+
 			<div class="item">
 				<div class="fecha">
 					{{ c.date }}

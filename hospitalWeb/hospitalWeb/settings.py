@@ -31,6 +31,7 @@ LOGIN_URL = '/signin/'
 # Application definition
 
 INSTALLED_APPS = (
+	'suit',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -44,6 +45,16 @@ INSTALLED_APPS = (
 	'publicActions',
 	'datetimewidget',
 )
+
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+)
+
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'Mi Doctor - Administrador'
+}
 
 MIDDLEWARE_CLASSES = (
 	'django.contrib.sessions.middleware.SessionMiddleware',
