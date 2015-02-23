@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Hospital Buenavista</title>
-</head>
-<body>
-	<header>
-		<h1>Hospital Buenavista</h1>
-		<p> {{ patient.user.first_name }} {{ patient.user.last_name }}</p>
-	</header>
+{% extends "base.html" %}
+
+{% block content %}
+	
 	<section class="contenido">
 		<div class"prox_citas">
 			<p>Proximas Citas</p>
@@ -53,5 +46,5 @@
 			<a href="">Mensajes</a>
 		</div>
 	</section>
-</body>
-</html>
+
+{% endblock content %}

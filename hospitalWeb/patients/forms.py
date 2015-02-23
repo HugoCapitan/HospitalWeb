@@ -34,3 +34,8 @@ class PatientDataFillingForm(forms.ModelForm):
 	class Meta:
 		model = Patient
 		fields = ('curp', 'birth', 'phone')
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)

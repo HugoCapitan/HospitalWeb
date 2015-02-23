@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<section class="contenido">
+		<h2>Servicios</h2>
+		{% for appointment in object_list %}
+			<a href="">
+				<div class="item">
+					<p> {{ appointment.kind }} </p>
+					<p> {{ appointment.duration }} </p>
+				</div>
+			</a>
+		{% endfor %}
+	</section>
+{% endblock content %}

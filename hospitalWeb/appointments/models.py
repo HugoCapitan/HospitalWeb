@@ -26,9 +26,24 @@ class Appointment(models.Model):
 	kind = models.ForeignKey(AppointmentKind)
 	confirmed = models.BooleanField(default=False)
 	primaryKey = models.CharField(max_length=255, primary_key=True, editable=False)
+	slug = models.CharField(max_length=255, editable=False,unique=True)
 
 	def save(self, *args, **kwargs):
-		self.primaryKey = 'Doctor: %s, Paciente: %s, Horario: %s' % (self.doctor, self.patient, self.date)
+		doctor = self.doctor.medical_identification_card
+		patient = self.patient.curp
+
+		date = self.date.date()
+		time = self.date.time()
+
+		day = self.date.day
+		month = self.date.month
+		year = self.date.year
+		hour = self.date.hour
+		minute = self.date.minute
+
+		self.primaryKey = 'Doctor: %s, Paciente: %s, Dia: %s, Hora: %s' % (doctor, patient, date, time)
+		self.slug = 'doc-%s-pat-%s-day-%s-month-%s-year-%s-hour-%s-minute-%s' % (doctor, patient, day, month, year, hour, minute)
+
 		super(Appointment, self).save(*args, **kwargs)
 
 	class Meta:
@@ -36,4 +51,4 @@ class Appointment(models.Model):
 		verbose_name_plural = "Appointments"
 
 	def __str__(self):
-		return 'Doctor: %s, Paciente: %s, Horario: %s' % (self.doctor, self.patient, self.date)
+		return 'Doctor: %s, Paciente: %s, Dia: %s, Horario: %s' % (self.doctor, self.patient, self.date.date(), self.date.time())

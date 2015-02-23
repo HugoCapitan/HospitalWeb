@@ -12,10 +12,12 @@ class Diagnostic(models.Model):
 	results = models.TextField(blank=True)
 	appointment = models.ForeignKey(Appointment)
 	date = models.DateField(auto_now=True, blank=False)
+	slug = models.CharField(max_length=255, editable=False)
 	primaryKey = models.CharField(max_length=50, primary_key=True, editable=False)
 
 	def save(self, *args, **kwargs):
 		self.primaryKey = 'Doctor: %s, Paciente: %s, Horario: %s' % (self.doctor.medical_identification_card, self.patient.curp, self.date)
+		self.slug = '%s-%s-%s' % (self.doctor.medical_identification_card, self.patient.curp, self.date)
 		super(Diagnostic, self).save(*args, **kwargs)
 
 	class Meta:

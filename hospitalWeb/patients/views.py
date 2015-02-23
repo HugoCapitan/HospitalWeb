@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 
 from .forms import UserCreationEmailForm, PatientDataFillingForm
 from .models import Patient
@@ -84,3 +84,35 @@ class ProfileView(TemplateView):
 		except Appointment.DoesNotExist:
 			citas = None
 		return citas
+
+
+class LoginView(FormView):
+	form_class = AuthenticationForm
+	template_name = 'login.html'
+	success_url = '/patients/profile/'
+
+	def form_valid(self, form):
+		username = form.cleaned_data['username']
+		password = form.cleaned_data['password']
+		user = authenticate(username=username, password=password)
+
+		login(self.request, form.user_cache)
+		
+		return super(LoginView, self).form_valid(form)
+
+	def get_context_data(self, **kwargs):
+		context = super(LoginView, self).get_context_data(**kwargs)
+		is_auth = False
+		name = None
+
+		if self.request.user.is_authenticated():
+			is_auth = True
+			name = self.request.user.username
+
+		data = {
+			'is_auth': is_auth,
+			'name': name,
+		}
+
+		context.update(data)
+		return context
