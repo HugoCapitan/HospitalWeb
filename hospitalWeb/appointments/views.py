@@ -1,23 +1,30 @@
 from django.shortcuts import render
 
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, FormView
 
 from .models import Appointment, AppointmentKind
 from .forms import AppointmentCreationForm
 
+from patients.models import Patient
+
 
 class AppointmentDetailView_Patient(DetailView):
 	model = Appointment
-	template_name = 'appointment_patient_detail.html'
+	template_name = 'appointment_detail_patient.html'
 
 
-def AppointmentAdd_Patient(request):
-	form = AppointmentCreationForm
+class AppointmentAddPatientView(FormView):
+	form_class = AppointmentCreationForm
+	template_name = 'appointment_creation_patient.html'
+	success_url = '/patients/profile/'
 
-	if form.is_valid():
-		appoint = form.save(commit=False)
-		appoint.patient = self.get_patient()
+	def form_valid(self, form):
+		patient = self.get_patient()
+		appoint = form.save(commit = False)
+		appoint.patient = patient
 		appoint.save()
+
+		return super(AppointmentAddPatientView, self).form_valid(form)
 
 	def get_patient(self):
 		user = self.request.user;
@@ -40,5 +47,5 @@ class AppointmentKindListView(ListView):
 		return queryset
 
 class AppointmentKindDetailView(DetailView):
-    model = AppointmentKindDetailView
+    model = AppointmentKind
     template_name = "appointmentkind_detail.html"

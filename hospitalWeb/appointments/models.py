@@ -9,6 +9,7 @@ class AppointmentKind(models.Model):
 	kind = models.CharField(max_length=50, blank=False, primary_key=True)
 	duration = models.PositiveIntegerField(blank=False)
 	doctors = models.ManyToManyField(Doctor)
+	slug = models.CharField(max_length=50)
 
 	class Meta:
 		verbose_name = "AppointmentKind"

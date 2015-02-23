@@ -42,6 +42,7 @@ INSTALLED_APPS = (
 	'patients',
 	'privateActions',
 	'publicActions',
+	'datetimewidget',
 )
 
 MIDDLEWARE_CLASSES = (
