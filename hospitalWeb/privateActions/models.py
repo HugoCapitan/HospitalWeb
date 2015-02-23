@@ -2,15 +2,15 @@ from django.db import models
 
 from doctors.models import Doctor
 from patients.models import Patient
+from appointments.models import Appointment
 
 
 class Diagnostic(models.Model):
 
 	primary_content = models.TextField(blank=False)
-	treatment = models.TextField()
-	results = models.TextField()
-	patient = models.ForeignKey(Patient)
-	doctor = models.ForeignKey(Doctor)
+	treatment = models.TextField(blank=True)
+	results = models.TextField(blank=True)
+	appointment = models.ForeignKey(Appointment)
 	date = models.DateField(auto_now=True, blank=False)
 	primaryKey = models.CharField(max_length=50, primary_key=True, editable=False)
 

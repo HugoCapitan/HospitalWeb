@@ -22,13 +22,13 @@ class Appointment(models.Model):
 	date = models.DateTimeField(auto_now=False, auto_now_add=False, blank=False)
 	patient = models.ForeignKey(Patient)
 	doctor = models.ForeignKey(Doctor)
-	comment = models.TextField()
+	comment = models.TextField(blank= True)
 	kind = models.ForeignKey(AppointmentKind)
 	confirmed = models.BooleanField(default=False)
 	primaryKey = models.CharField(max_length=255, primary_key=True, editable=False)
 
 	def save(self, *args, **kwargs):
-		self.primaryKey = 'Doctor: %s, Paciente: %s, Horario: %s' % (self.doctor.medical_identification_card, self.patient.curp, self.date)
+		self.primaryKey = 'Doctor: %s, Paciente: %s, Horario: %s' % (self.doctor, self.patient, self.date)
 		super(Appointment, self).save(*args, **kwargs)
 
 	class Meta:

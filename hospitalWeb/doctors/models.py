@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 class Doctor(models.Model):
 
 	user = models.OneToOneField(User)
-	medical_identification_card = models.CharField(max_length=20, blank=False, unique=True)
+	medical_identification_card = models.CharField(max_length=20, blank=False, primary_key=True)
 	egress = models.CharField(max_length=50, blank=False)
 	specialism = models.CharField(max_length=50, blank=False)
 	phone = PhoneNumberField(blank=False)

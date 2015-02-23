@@ -33,4 +33,4 @@ class PatientDataFillingForm(forms.ModelForm):
 
 	class Meta:
 		model = Patient
-		fields = ('curp', 'birth', 'phone', 'user')
+		fields = ('curp', 'birth', 'phone')
