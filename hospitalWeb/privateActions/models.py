@@ -40,4 +40,4 @@ class Message(models.Model):
 		verbose_name_plural = "messages"
 
 	def __str__(self):
-		pass    
+		return 'Doctor: %s, Paciente: %s' % (self.doctor, self.patient)

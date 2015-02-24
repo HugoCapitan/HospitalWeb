@@ -11,5 +11,4 @@ class Announcement(models.Model):
 		verbose_name_plural = "Announcements"
 
 	def __str__(self):
-		pass
-	
+		return content;

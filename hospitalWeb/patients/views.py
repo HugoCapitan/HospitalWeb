@@ -80,7 +80,7 @@ class ProfileView(TemplateView):
 		user_id = user.id;
 		patient = Patient.objects.get(user = user_id)
 		try:
-			citas = Appointment.objects.filter(date__gt=datetime.datetime.now())
+			citas = Appointment.objects.filter(date__gt=datetime.datetime.now(), patient=patient)
 		except Appointment.DoesNotExist:
 			citas = None
 		return citas
