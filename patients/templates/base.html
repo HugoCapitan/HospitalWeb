@@ -1,27 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Hospital Buenavista</title>
-	<script src="{{ STATIC_URL }}js/jquery-1.11.0.js"></script>
+<html>
+	<head>
+		<title>MiDoctor</title>
+		<script type="text/javascript" src="{{STATIC_URL}}js/actions.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+		<link href='{{STATIC_URL}}images/icon.png' rel='shortcut icon' type='image/png'/>
+		<link rel="stylesheet"  href="{{STATIC_URL}}css/offDevice.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	</head>
+	<body onload="adjust()" onresize="adjust()">
+		<div id="MenuBar">
+			<div class="optionLogo">				
+				<a href="/patients/profile"><img src="{{STATIC_URL}}images/icon.png" id="logo"></a>
+			</div>	
+			<!--Siguiendo las reglas que propone Google, no debe haber un boton de "inicio" como tal, el logo debe redireccionar al Inicio, eso lo hace intuitivo.
 
-    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
-</head>
-<body>
-	<header>
-		<h1>Hospital Buenavista</h1>
-		{% if user.is_authenticated %}
-		<a href="/patients/profile">
-		<p> {{ user.first_name }} {{ user.last_name }}</p>
-		</a>
-		{% else %}
-		<a href="/patients/login/">Iniciar Secion!</a> / <a href="/patients/signup/">Registrarme!</a>
-		{% endif %}
-	</header>
+			Los Menus deben estar en orden alfábetico-->
 
-    {% block content %}
-    {% endblock content %}
+            {% if not is_auth %}	
+            	<div class="option">
+					<a href="/patients/profile"> Ir a mi perfil </a>
+				</div>
+			{% else %}		
+				<div class="option">
+					<a href="/patients/signup"> Crear Cuenta </a>
+				</div>
+				<div class="option">
+					<a href="/patients/login"> Iniciar Sesión </a>
+				</div>	
+			{% endif %}
 
-</body>
+            </div>
+		</div>
+		<div id="ContentWrapper">
+			<div id="NavigationBar">
+				<div id="icon">
+					<input type="button" value="j" id="iconButton" onclick="sMenu()">
+				</div>
+				<div id="title">			
+					<h1>Inicio</h1>
+				</div>					
+			</div>
+			<div id="ContentHolder">
+			{% block content %}
+				
+			{% endblock content %}
+			</div>
+		</div>
+	</body>
 </html>

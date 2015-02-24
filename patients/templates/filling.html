@@ -1,12 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Terminar registro</title>
-</head>
-<body>
-	<header>
-		<h1>Termina tu registro en Hospital Web</h1>
+<html>
+	<head>
+		<title>Registro</title>
+		<script type="text/javascript" src="js/actions.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+		<link href='{{STATIC_URL}}/images/icon.png' rel='shortcut icon' type='image/png'/>
+		<link rel="stylesheet"  href="{{STATIC_URL}}/css/offDevice.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	</head>
+	<body onload="adjust()" onresize="adjust()">
+		<div id="MenuBar">
+			<div class="optionLogo">				
+				<a href="index.html"><img src="{{STATIC_URL}}/images/icon.png" id="logo"></a>
+			</div>	
+			<!--Siguiendo las reglas que propone Google, no debe haber un boton de "inicio" como tal, el logo debe redireccionar al Inicio, eso lo hace intuitivo.
+
+			Los Menus deben estar en orden alfábetico-->
+			
+			{% if is_auth %}
+				<div class="option">
+					<a href="/patients/signup"> Crear Cuenta </a>
+				</div>
+				<div class="option">
+					<a href="/patients/login"> Iniciar Sesión </a>
+				</div>
+			{% else %}				
+            	<div class="option">
+					<a href="/patients/profile"> Ir a mi perfil </a>
+				</div>
+			{% endif %}
+
+		</div>
+		<div id="ContentWrapper">
+			<div id="NavigationBar">
+				<div id="icon">
+					<input type="button" value="j" id="iconButton" onclick="sMenu()">
+				</div>
+				<div id="title">			
+					<h1>Inicio > Registro > Terminar Registro</h1>
+				</div>
+			</div>
+			<div id="ContentHolder">
+			<header>
+		<h2>Termina tu registro en Hospital Web</h2>
 	</header>
 	<section class="sign_form" >
 		<form action="" method="post">
@@ -15,6 +50,7 @@
 			<input class="enviar" type="submit" value="Enviar" />
 		</form>
 	</section>
-</body>
-</body>
+			</div>
+		</div>
+	</body>
 </html>

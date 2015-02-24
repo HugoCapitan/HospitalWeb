@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+	<h2>Bienvenido al Hospital -Inserte Nombre del hospital aqui- </h2>
+	<div class="objects">
+	<h3>Avisos:</h3>
+		{% for announcement in object_list %}
+			<div class="item">
+				<h4>{{announcement.title}}</h4>
+				<p>{{announcement.content}}</p>
+				<img src="{{announcement.image.url}}" width="50%" >
+			</div>
+		{% endfor %}
+	</div>
+{% endblock content %}

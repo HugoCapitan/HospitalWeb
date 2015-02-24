@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, ListView
 
 from .forms import UserCreationEmailForm, PatientDataFillingForm
 from .models import Patient
@@ -32,7 +32,6 @@ def signup(request):
 	return render(request, 'signup.html', {'form': form})
 
 
-
 @login_required
 def filling(request):
 	form = PatientDataFillingForm(request.POST or None)
@@ -57,6 +56,16 @@ def signin(request):
 	return render(request, 'login.html', {'form': form})
 
 import datetime
+from publicActions.models import Announcement
+
+
+
+class IndexView(ListView):
+	template_name = 'index.html'
+	model = Announcement
+
+
+
 
 class ProfileView(TemplateView):
 	template_name = 'profile.html'
@@ -84,6 +93,7 @@ class ProfileView(TemplateView):
 		except Appointment.DoesNotExist:
 			citas = None
 		return citas
+
 
 
 class LoginView(FormView):
@@ -116,3 +126,5 @@ class LoginView(FormView):
 
 		context.update(data)
 		return context
+
+

@@ -31,7 +31,7 @@ LOGIN_URL = '/signin/'
 # Application definition
 
 INSTALLED_APPS = (
-	'suit',
+	'grappelli',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
@@ -52,9 +52,7 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
 )
 
-SUIT_CONFIG = {
-    'ADMIN_NAME': 'Mi Doctor - Administrador'
-}
+GRAPPELLI_ADMIN_TITLE = 'Mi Doctor - Administrador'
 
 MIDDLEWARE_CLASSES = (
 	'django.contrib.sessions.middleware.SessionMiddleware',

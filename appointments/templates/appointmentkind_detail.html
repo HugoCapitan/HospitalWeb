@@ -8,12 +8,12 @@
 		</div>
 		<div>
 			{% for d in object.doctors.all %}
-				<a href="">
-					<div class="item">
-						<p> {{ d.user.first_name }} {{ d.user.last_name }} </p>
-						<p> {{ d.medical_identification_card }} </p>
-					</div>
-				</a>
+<a href="">
+	<div class="item">
+		<p> {{ d.user.first_name }} {{ d.user.last_name }} </p>
+		<p> {{ d.medical_identification_card }} </p>
+	</div>
+</a>
 			{% endfor %}
 		</div>
 	</section>
