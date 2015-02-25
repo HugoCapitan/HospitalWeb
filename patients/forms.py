@@ -5,37 +5,14 @@ from django.contrib.auth import authenticate
 
 from .models import Patient
 
-class UserCreationEmailForm(UserCreationForm):
-	email = forms.EmailField()
-	first_name = forms.CharField(max_length=50)
-	last_name = forms.CharField(max_length=50)
 
-	class Meta:
-		model = User
-		fields = ('first_name', 'last_name', 'username', 'email')
-
-
-	def clean_email(self):
-		email = self.cleaned_data.get('email')
-	 	try:
-	 		User.objects.get(email = email)
-	 		raise forms.ValidationError('Email Repetido')
-	 	except User.DoesNotExist:
-	 		return email
-
-
-	def get_authentication_data(self):
-	 	authentication_data = {'username': self.cleaned_data.get('username'), 'email': self.cleaned_data.get('email'), 'password': self.cleaned_data.get('password1')}
-	 	return authentication_data
-
-
-class PatientDataFillingForm(forms.ModelForm):
+class PatientCreationForm(forms.ModelForm):
 
 	class Meta:
 		model = Patient
 		fields = ('curp', 'birth', 'phone')
 
 
-class LoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+# class LoginForm(forms.Form):
+#     username = forms.CharField()
+#     password = forms.CharField(widget=forms.PasswordInput)

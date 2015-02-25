@@ -10,22 +10,23 @@
 	<body onload="adjust()" onresize="adjust()">
 		<div id="MenuBar">
 			<div class="optionLogo">				
-				<a href="/patients/profile"><img src="{{STATIC_URL}}images/icon.png" id="logo"></a>
+				<a href="/"><img src="{{STATIC_URL}}images/icon.png" id="logo"></a>
 			</div>	
 			<!--Siguiendo las reglas que propone Google, no debe haber un boton de "inicio" como tal, el logo debe redireccionar al Inicio, eso lo hace intuitivo.
 
 			Los Menus deben estar en orden alfábetico-->
 
-            {% if not is_auth %}	
+            {% if user.is_authenticated %}	
             	<div class="option">
-					<a href="/patients/profile"> Ir a mi perfil </a>
+            		<p> {{user.first_name}} {{user.last_name}} </p>
+					<a href="/pacientes/perfil"> Ir a mi perfil </a>
 				</div>
-			{% else %}		
+			{% else %}	
 				<div class="option">
-					<a href="/patients/signup"> Crear Cuenta </a>
+					<a href="/pacientes/signup"> Crear Cuenta </a>
 				</div>
 				<div class="option">
-					<a href="/patients/login"> Iniciar Sesión </a>
+					<a href="/pacientes/login"> Iniciar Sesión </a>
 				</div>	
 			{% endif %}
 
@@ -37,7 +38,7 @@
 					<input type="button" value="j" id="iconButton" onclick="sMenu()">
 				</div>
 				<div id="title">			
-					<h1>Inicio</h1>
+					<h1>{{request.path}}</h1>
 				</div>					
 			</div>
 			<div id="ContentHolder">

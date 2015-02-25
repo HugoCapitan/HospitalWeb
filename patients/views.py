@@ -4,66 +4,15 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.http import HttpResponse
 from django.shortcuts import render
-
 from django.views.generic import TemplateView, FormView, ListView
 
-from .forms import UserCreationEmailForm, PatientDataFillingForm
+from .forms import PatientCreationForm
 from .models import Patient
 
+from hospitalWeb.forms import UserCreationCompleteForm
 from appointments.models import Appointment
 
-def signup(request):
-	form = UserCreationEmailForm(request.POST or None)
-
-	if form.is_valid():
-		form.save()
-		authentication_data = form.get_authentication_data()
-		user = authenticate(username = authentication_data['username'], password = authentication_data['password'])
-		login(request, user)
-		if request.user.is_authenticated():
-			username = request.user.username
-			email = request.user.email
-			f_data = {
-				'username': username,
-				'email': email
-			}
-			return render(request, 'first_welcome.html', {'data': f_data})
-
-	return render(request, 'signup.html', {'form': form})
-
-
-@login_required
-def filling(request):
-	form = PatientDataFillingForm(request.POST or None)
-
-	if form.is_valid():
-		user = request.user
-		pat = form.save(commit=False)
-		pat.user = user
-		pat.save()
-		return render(request, 'data_filling_completed.html', {'user': user})
-
-	return render(request, 'filling.html', {'form': form})
-
-
-
-def signin(request):
-
-	form = AuthenticationForm(request.POST or None)
-	if form.is_valid():
-		login(request, form.get_user())
-
-	return render(request, 'login.html', {'form': form})
-
 import datetime
-from publicActions.models import Announcement
-
-
-
-class IndexView(ListView):
-	template_name = 'index.html'
-	model = Announcement
-
 
 
 
@@ -96,35 +45,65 @@ class ProfileView(TemplateView):
 
 
 
+class FillingView(FormView):
+	form_class = PatientCreationForm
+	template_name = 'filling.html'
+	success_url = '/pacientes/perfil/'
+
+	def post(self, request, *args, **kwargs):
+		form = self.form_class(request.POST)
+		if form.is_valid():
+			user = request.user
+			instance = form.save(commit=False)
+			instance.user = user
+			instance.save()
+			return self.form_valid(form)
+		else:
+			return self.form_invalid(form)
+
+
+
+class SignupView(FormView):
+	form_class = UserCreationCompleteForm
+	template_name = 'signup.html'
+	success_url = '/pacientes/signup/end/'
+
+	def post(self, request, *args, **kwargs):
+		form = self.form_class(request.POST)
+		if form.is_valid():
+			form.save()
+			authentication_data = form.get_authentication_data()
+			user = authenticate(username = authentication_data['username'], password = authentication_data['password'])
+			login(request, user)
+			if request.user.is_authenticated():
+				username = request.user.username
+				email = request.user.email
+				f_data = {
+					'username': username,
+					'email': email
+				}
+			return self.form_valid(form)
+		else:
+			return self.form_invalid(form)
+
+
+
 class LoginView(FormView):
 	form_class = AuthenticationForm
 	template_name = 'login.html'
-	success_url = '/patients/profile/'
+	success_url = '/pacientes/perfil/'
 
-	def form_valid(self, form):
-		username = form.cleaned_data['username']
-		password = form.cleaned_data['password']
-		user = authenticate(username=username, password=password)
+	def post(self, request, *args, **kwargs):
+		form = self.form_class(request.POST)
+		if form.is_valid():
+			username = form.cleaned_data['username']
+			password = form.cleaned_data['password']
+			
+			user = authenticate(username=username, password=password)
+			login(request, user)
 
-		login(self.request, form.user_cache)
-		
-		return super(LoginView, self).form_valid(form)
-
-	def get_context_data(self, **kwargs):
-		context = super(LoginView, self).get_context_data(**kwargs)
-		is_auth = False
-		name = None
-
-		if self.request.user.is_authenticated():
-			is_auth = True
-			name = self.request.user.username
-
-		data = {
-			'is_auth': is_auth,
-			'name': name,
-		}
-
-		context.update(data)
-		return context
+			return self.form_valid()
+		else:
+			return self.form_invalid()
 
 
