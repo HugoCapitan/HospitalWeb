@@ -102,8 +102,8 @@ class LoginView(FormView):
 			user = authenticate(username=username, password=password)
 			login(request, user)
 
-			return self.form_valid()
+			return self.form_valid(form)
 		else:
-			return self.form_invalid()
+			return self.form_invalid(form)
 
 
