@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+	
+	<section class="contenido">
+		<div class"prox_citas">
+			<p>Proximas Citas</p>
+
+			{% for c in citas %}
+			{# doc-%s-pat-%s-day-%s-month-%s-year-%s-hour-%s-minute-%s #}
+			<a href="/pacientes/cita/{{ c.slug }}">
+
+			<div class="item">
+				<div class="fecha">
+					{{ c.date }}
+				</div>
+				<div class="doctor">
+					<p><strong>Doctor: </strong>{{ c.doctor }}</p>
+				</div>
+			</div>
+			</a>
+			{% endfor %}
+
+		</div>
+		<div class="f_cita">
+			<a href="/citas/tipos/"><p>Buscar una cita</p></a>
+		</div>
+		<div class="f_doctor">
+			<a href="/doctores/"><p>Buscar un doctor</p></a>
+		</div>
+	</section>
+	<section class="accciones">
+		<div class="item">
+			<a href="">Citas Pasadas</a>
+		</div>
+		<div class="item">
+			<a href="">Diagnosticos</a>
+		</div>
+		<div class="item">
+			<a href="">Mensajes</a>
+		</div>
+	</section>
+
+{% endblock content %}

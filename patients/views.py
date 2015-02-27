@@ -1,6 +1,4 @@
-from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -13,36 +11,6 @@ from hospitalWeb.forms import UserCreationCompleteForm
 from appointments.models import Appointment
 
 import datetime
-
-
-
-class ProfileView(TemplateView):
-	template_name = 'profile.html'
-
-	def get_context_data(self, **kwargs):
-		context = super(ProfileView, self).get_context_data(**kwargs)
-
-		if self.request.user.is_authenticated():
-			context.update({'patient': self.get_patient(), 'citas': self.get_citas()})
-
-		return context
-
-	def get_patient(self):
-		user = self.request.user;
-		user_id = user.id;
-		patient = Patient.objects.get(user = user_id)
-		return patient
-
-	def get_citas(self):
-		user = self.request.user;
-		user_id = user.id;
-		patient = Patient.objects.get(user = user_id)
-		try:
-			citas = Appointment.objects.filter(date__gt=datetime.datetime.now(), patient=patient)
-		except Appointment.DoesNotExist:
-			citas = None
-		return citas
-
 
 
 class FillingView(FormView):
@@ -86,18 +54,3 @@ class SignupView(FormView):
 		else:
 			return self.form_invalid(form)
 
-
-
-class LoginView(FormView):
-    form_class = AuthenticationForm
-    template_name = 'login.html'
-    success_url = '/pacientes/perfil/'
-
-    def form_valid(self, form):
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        user = authenticate(username=username, password=password)
-
-        login(self.request, form.user_cache)
-        
-        return super(LoginView, self).form_valid(form)

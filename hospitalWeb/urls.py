@@ -1,12 +1,10 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-
-from .views import IndexView
-
 from django.conf import settings
 from django.conf.urls.static import static 
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+from .views import IndexView, ProfileView, LoginView
 
 urlpatterns = patterns('',
     # Examples:
@@ -17,6 +15,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('patients.urls')),
     url(r'', include('appointments.urls')),
+	url(r'^login/$', LoginView.as_view(), name='login'),
+	url(r'^perfil/$', ProfileView.as_view(), name='profile'),
 )
 
 

@@ -17,20 +17,19 @@
 			Los Menus deben estar en orden alfábetico-->
 
             {% if user.is_authenticated %}	
-            	<div class="option">
-            		<p> {{user.first_name}} {{user.last_name}} </p>
-					<a href="/pacientes/perfil"> Ir a mi perfil </a>
-				</div>
+            	<div class="option"><p> {{user.first_name}} {{user.last_name}} </p></div>
+				<div class="option"><p><a href="/perfil/"> Ir a mi perfil </a></p></div>
+				<div class="option"><p><a href="">Citas Pasadas</a></p></div>
+				<div class="option"><p><a href="">Diagnosticos</a></p></div>
+				<div class="option"><p><a href="">Mensajes</a></p></div>
 			{% else %}	
 				<div class="option">
 					<a href="/pacientes/signup"> Crear Cuenta </a>
 				</div>
 				<div class="option">
-					<a href="/pacientes/login"> Iniciar Sesión </a>
+					<a href="/login/"> Iniciar Sesión </a>
 				</div>	
 			{% endif %}
-
-            </div>
 		</div>
 		<div id="ContentWrapper">
 			<div id="NavigationBar">

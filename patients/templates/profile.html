@@ -6,39 +6,60 @@
 		<div class"prox_citas">
 			<p>Proximas Citas</p>
 
-			{% for c in citas %}
-			{# doc-%s-pat-%s-day-%s-month-%s-year-%s-hour-%s-minute-%s #}
-			<a href="/pacientes/cita/{{ c.slug }}">
+				{% if citas == None %}
 
-			<div class="item">
-				<div class="fecha">
-					{{ c.date }}
-				</div>
-				<div class="doctor">
-					<p><strong>Doctor: </strong>{{ c.doctor }}</p>
-				</div>
-			</div>
-			</a>
-			{% endfor %}
+					<p>No tienes ninguna cita</p>
+
+				{% else %}
+
+				{% for c in citas %}
+					<div class="item">
+						<a href="/pacientes/cita/{{ c.slug }}">
+							<div class="fecha">
+								{{ c.date }}
+							</div>
+							{% if us_kind == 'paciente' %}
+									<div class="doctor">
+										<p><strong>Doctor: </strong>{{ c.doctor }}</p>
+									</div>
+								{% else %}
+									<div class="paciente">
+										<p><strong>Paciente: </strong>{{ c.patient }}</p>
+									</div>
+							<p>
+						</a>
+							{% if c.confirmed %}
+								<form action="" method="post">
+									<input type="button" value="Cancelar">
+								</form>
+							{% else %}
+								<form action="" method="post">
+									<input type="button" value="Confirmar">
+								</form>
+							{% endif %}
+						{% endif %}
+					</div>
+				{% endfor %}
+			{% endif %}
 
 		</div>
+		{% if us_kind == 'paciente' %}
+			
 		<div class="f_cita">
 			<a href="/citas/tipos/"><p>Buscar una cita</p></a>
 		</div>
+
 		<div class="f_doctor">
 			<a href="/doctores/"><p>Buscar un doctor</p></a>
 		</div>
-	</section>
-	<section class="accciones">
-		<div class="item">
-			<a href="">Citas Pasadas</a>
+
+		{% else %}
+
+		<div class="f_pacientes">
+			<a href="/doctores/"><p>Buscar un paciente</p></a>
 		</div>
-		<div class="item">
-			<a href="">Diagnosticos</a>
-		</div>
-		<div class="item">
-			<a href="">Mensajes</a>
-		</div>
+
+		{% endif %}
 	</section>
 
 {% endblock content %}
