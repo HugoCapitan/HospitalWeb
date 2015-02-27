@@ -7,8 +7,8 @@ urlpatterns = patterns('',
 	url(r'^pacientes/signup/$', SignupView.as_view(), name='signup'),
 	url(r'^pacientes/signup/end/$', FillingView.as_view(), name='filling'),
 	url(r'^pacientes/perfil/$', ProfileView.as_view(), name='profile'),
-	# url(r'^pacientes/login/$', LoginView.as_view(), name='login'),
-	url(r'^pacientes/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+	url(r'^pacientes/login/$', LoginView.as_view(), name='login'),
+	# url(r'^pacientes/login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
 	url(r'^accounts/profile/$', RedirectView.as_view(url='/pacientes/perfil'))
 
 )

@@ -26,7 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = '/signin/'
+LOGIN_URL = '/login/'
 
 # Application definition
 

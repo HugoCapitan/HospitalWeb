@@ -89,21 +89,15 @@ class SignupView(FormView):
 
 
 class LoginView(FormView):
-	form_class = AuthenticationForm
-	template_name = 'login.html'
-	success_url = '/pacientes/perfil/'
+    form_class = AuthenticationForm
+    template_name = 'login.html'
+    success_url = '/pacientes/perfil/'
 
-	def post(self, request, *args, **kwargs):
-		form = self.form_class(request.POST)
-		if form.is_valid():
-			username = form.cleaned_data['username']
-			password = form.cleaned_data['password']
-			
-			user = authenticate(username=username, password=password)
-			login(request, user)
+    def form_valid(self, form):
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = authenticate(username=username, password=password)
 
-			return self.form_valid(form)
-		else:
-			return self.form_invalid(form)
-
-
+        login(self.request, form.user_cache)
+        
+        return super(LoginView, self).form_valid(form)
