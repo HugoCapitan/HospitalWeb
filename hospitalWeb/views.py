@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
 from django.views.generic import ListView, FormView, TemplateView
@@ -15,21 +17,25 @@ class IndexView(ListView):
 
 
 class LoginView(FormView):
-    form_class = AuthenticationForm
-    template_name = 'login.html'
-    success_url = '/perfil/'
+	form_class = AuthenticationForm
+	template_name = 'login.html'
+	success_url = '/perfil/'
 
-    def form_valid(self, form):
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        user = authenticate(username=username, password=password)
-        login(self.request, form.user_cache)
-        
-        return super(LoginView, self).form_valid(form)
-    	
+	def form_valid(self, form):
+		username = form.cleaned_data['username']
+		password = form.cleaned_data['password']
+		user = authenticate(username=username, password=password)
+		login(self.request, form.user_cache)
+		
+		return super(LoginView, self).form_valid(form)
 
+	
 class ProfileView(TemplateView):
 	template_name = 'profile.html'
+
+	@method_decorator(login_required)
+	def dispatch(self, *args, **kwargs):
+		return super(ProfileView, self).dispatch(*args, **kwargs)
 
 	def get_context_data(self, **kwargs):
 		context = super(ProfileView, self).get_context_data(**kwargs)
